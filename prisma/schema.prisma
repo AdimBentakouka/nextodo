@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "mysql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("DATABASE_URL_SHADOW_DB")
+}
+
+model Channel {
+  id         Int        @id @default(autoincrement())
+  name       String     @unique @db.VarChar(250)
+  categories Category[]
+}
+
+model Category {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(250)
+  todos     Todo[]
+  channel   Channel? @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  channelId Int
+
+  @@unique([name, channelId])
+}
+
+model Todo {
+  id         Int       @id @default(autoincrement())
+  name       String    @db.VarChar(250)
+  category   Category? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId Int
+}
