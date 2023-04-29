@@ -1,10 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { PrismaClient, Prisma } from "@prisma/client";
 
 import { IResChannel } from "@/types/channel";
-import { prismaFormatError } from "@/utils/prisma";
+import { deleteChannel } from "@/controllers/channel.controller";
 
-const prisma = new PrismaClient();
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<IResChannel>) {
     try {
@@ -23,37 +21,3 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<IResCh
         res.status(500).send({ error: "Server error!" });
     }
 }
-/**
- * Delete un channel
- */
-const deleteChannel = async (req: NextApiRequest, res: NextApiResponse<IResChannel>) => {
-    try {
-        const pid  = Number(req.query.pid as string);
-
-        if(isNaN(pid))
-        {
-          return res
-          .status(400)
-          .send({ error: "L'id n'est pas un nombre' !" });
-        }
-        await prisma.channel.delete({
-            where: {
-                id: pid
-            },
-        });
-
-        res.status(200).end();
-
-
-    } catch (error) {
-        console.error(error);
-        if (error instanceof Prisma.PrismaClientKnownRequestError) {
-            return res
-                .status(500)
-                .send({ error: prismaFormatError(error) });
-        }
-        res.status(500).send({
-            error: `Erreur lors de la suppression d'un channel`,
-        });
-    }
-};
