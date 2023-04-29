@@ -18,7 +18,7 @@ Nextodo est une application web de gestion de tâche qui a été développée da
 
 <p>J'ai choisi NextJS car il permet de développer des applications web rapidement et facilement, tout en offrant des performances élevées.</p> 
 <p>Tailwindcss m'a permis de designer l'interface rapidement en utilisants des classes bas niveau. </p> 
-<p>Tandis que socket.io m'a permis de mettre en place la communication en temps réel pour les messages instantanés. Enfin, Prisma m'a offert une interface simple et efficace pour interagir avec ma base de données relationnelle.</p>
+<p>Tandis que Prisma m'a offert une interface simple et efficace pour interagir avec ma base de données relationnelle.</p>
 <br />
 
 [![Next][next.js]][next-url] [![prisma][prisma]][prisma-url] [![tailwind][tailwind]][tailwind-url]
