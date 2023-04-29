@@ -11,7 +11,7 @@ datasource db {
   shadowDatabaseUrl = env("DATABASE_URL_SHADOW_DB")
 }
 
-model Channel {
+model Project {
   id         Int        @id @default(autoincrement())
   name       String     @unique @db.VarChar(250)
   categories Category[]
@@ -21,10 +21,10 @@ model Category {
   id        Int      @id @default(autoincrement())
   name      String   @db.VarChar(250)
   todos     Todo[]
-  channel   Channel? @relation(fields: [channelId], references: [id], onDelete: Cascade)
-  channelId Int
+  project   Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId Int
 
-  @@unique([name, channelId])
+  @@unique([name, projectId])
 }
 
 model Todo {

@@ -1,16 +1,16 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-import { IResChannel } from "@/types/channel";
-import { deleteChannel } from "@/controllers/channel.controller";
+import { IResProject } from "@/types/project";
+import { deleteProject } from "@/controllers/project.controller";
 
 
-export default function handler(req: NextApiRequest, res: NextApiResponse<IResChannel>) {
+export default function handler(req: NextApiRequest, res: NextApiResponse<IResProject>) {
     try {
         const { method } = req;
 
         switch (method) {
             case "DELETE":
-                deleteChannel(req, res);
+                deleteProject(req, res);
                 break;
             default:
                 return res.status(405).send({ error: "Method not allowed." });
